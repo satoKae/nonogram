@@ -1,0 +1,115 @@
+.container {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: sans-serif;
+}
+
+:root {
+  --cell-size: 24px; /* セルの大きさ */
+  --hint-area-size: 120px; /* ヒントエリア */
+  --grid-line-thin: 1px; /* 細い罫線 */
+  --grid-line-thick: 2px; /* 太い罫線 */
+
+  --color-border-main: #666; /* メインの枠線色 */
+  --color-border-sub: #ccc; /* セル間の細い線色 */
+  --color-border-thick: #999; /* 5マスごとの太い線色 */
+  --color-background-hint: #e8f4f5; /* ヒントエリアの背景色 */
+  --color-fill: #000; /* 塗りつぶされたセルの色 */
+  --color-empty: #fff; /* 塗りつぶされていないセルの色 */
+}
+
+.app {
+  display: grid;
+  grid-template-areas:
+    'corner col-hint'
+    'row-hint board';
+  grid-template-columns: var(--hint-area-size) 1fr;
+  grid-template-rows: var(--hint-area-size) 1fr;
+  gap: 0;
+  max-width: fit-content;
+  border: var(--grid-line-thin) solid var(--color-border-main);
+}
+
+/* 各エリアの配置 */
+
+.corner {
+  grid-area: corner;
+  background-color: var(--color-background-hint);
+  border-right: var(--grid-line-thin) solid var(--color-border-main);
+  border-bottom: var(--grid-line-thin) solid var(--color-border-main);
+}
+
+.col-hint {
+  display: flex;
+  flex-direction: row;
+  grid-area: col-hint;
+  overflow: hidden;
+  border-bottom: var(--grid-line-thin) solid var(--color-border-main);
+  background-color: var(--color-background-hint);
+}
+
+.row-hint {
+  grid-area: row-hint;
+  overflow: hidden;
+  border-right: var(--grid-line-thin) solid var(--color-border-main);
+  background-color: var(--color-background-hint);
+}
+
+/* 盤面 */
+
+.board {
+  grid-area: board;
+  display: grid;
+  grid-template-columns: repeat(var(--column-size), var(--cell-size));
+  grid-template-rows: repeat(var(--row-size), var(--cell-size));
+}
+
+/* ヒント */
+
+.col-hint-cell {
+  width: var(--cell-size);
+  height: var(--hint-area-size);
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  border-left: var(--grid-line-thin) solid var(--color-border-sub);
+  box-sizing: border-box;
+}
+
+.row-hint-cell {
+  height: var(--cell-size);
+  width: var(--hint-area-size);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  border-top: var(--grid-line-thin) solid var(--color-border-sub);
+  box-sizing: border-box;
+}
+
+/* 盤面のセル */
+
+.board-cell {
+  width: var(--cell-size);
+  height: var(--cell-size);
+  border: var(--grid-line-thin) solid var(--color-border-sub);
+  box-sizing: border-box;
+  background-color: var(--color-empty);
+  cursor: pointer;
+  user-select: none;
+}
+
+.board-cell[data-cell-x$='4'],
+.board-cell[data-cell-x$='9'] {
+  border-right-width: var(--grid-line-thick);
+  border-right-color: var(--color-border-thick);
+}
+
+.board-cell[data-cell-y$='4'],
+.board-cell[data-cell-y$='9'] {
+  border-bottom-width: var(--grid-line-thick);
+  border-bottom-color: var(--color-border-thick);
+}
