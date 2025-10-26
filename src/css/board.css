@@ -113,3 +113,7 @@
   border-bottom-width: var(--grid-line-thick);
   border-bottom-color: var(--color-border-thick);
 }
+
+.board-cell.painted {
+  background-color: var(--color-fill);
+}

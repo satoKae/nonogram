@@ -1,17 +1,24 @@
+let isDrawing: boolean = false;
+const paintedCells = new Set<string>();
+
 export function boardMouseMove(event: MouseEvent) {
   if (event.target instanceof HTMLElement) {
     const targetElement: HTMLElement = event.target;
 
-    if (!targetElement) {
+    if (
+      !targetElement ||
+      !targetElement.classList.contains('board-cell') ||
+      !isDrawing ||
+      paintedCells.has(targetElement.id)
+    ) {
       return;
     }
 
-    if (!targetElement.classList.contains('board-cell')) {
-      return;
-    }
+    paintedCells.add(targetElement.id);
+    const x: number = Number(targetElement.getAttribute('data-cell-x'));
+    const y: number = Number(targetElement.getAttribute('data-cell-y'));
 
-    const x = targetElement.getAttribute('data-cell-x');
-    const y = targetElement.getAttribute('data-cell-y');
+    targetElement.classList.toggle('painted');
   }
 }
 
@@ -20,6 +27,7 @@ export function boardContextMenu(event: PointerEvent) {
 }
 
 export function boardMouseDown(event: MouseEvent) {
+  isDrawing = true;
   if (event.button === 0) {
     // 左
   } else if (event.button === 2) {
@@ -27,6 +35,7 @@ export function boardMouseDown(event: MouseEvent) {
   }
 }
 
-export function boardMouseUp(event: MouseEvent) {
-  return;
+export function documentMouseUp(event: MouseEvent) {
+  isDrawing = false;
+  paintedCells.clear();
 }

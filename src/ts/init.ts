@@ -2,7 +2,7 @@ import {
   boardContextMenu,
   boardMouseDown,
   boardMouseMove,
-  boardMouseUp,
+  documentMouseUp,
 } from './draw.ts';
 import { createNewElement, TagName } from './utils/element.ts';
 
@@ -44,7 +44,7 @@ export default function (
   boardElement.addEventListener('contextmenu', boardContextMenu);
   boardElement.addEventListener('mousemove', boardMouseMove);
   boardElement.addEventListener('mousedown', boardMouseDown);
-  boardElement.addEventListener('mouseup', boardMouseUp);
+  document.addEventListener('mouseup', documentMouseUp);
 
   for (let y = 0; y < rowSize; y++) {
     for (let x = 0; x < columnSize; x++) {
