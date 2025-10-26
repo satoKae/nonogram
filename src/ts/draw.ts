@@ -8,37 +8,14 @@ export function boardMouseMove(event: MouseEvent) {
   if (event.target instanceof HTMLElement) {
     const targetElement: HTMLElement = event.target;
 
-    if (
-      !targetElement ||
-      !targetElement.classList.contains('board-cell') ||
-      !isDrawing ||
-      paintedCells.has(targetElement.id)
-    ) {
+    if (!targetElement) {
       return;
     }
 
-    paintedCells.add(targetElement.id);
+    applyDrawing(targetElement);
+
     const x: number = Number(targetElement.getAttribute('data-cell-x'));
     const y: number = Number(targetElement.getAttribute('data-cell-y'));
-
-    switch (paintingMode) {
-      case 'setPaint':
-        if (targetElement.hasAttribute('data-status')) {
-          break;
-        }
-        targetElement.setAttribute('data-status', 'painted');
-        break;
-
-      case 'setBlank':
-        if (targetElement.hasAttribute('data-status')) {
-          break;
-        }
-        targetElement.setAttribute('data-status', 'blank');
-        break;
-
-      case 'erase':
-        targetElement.removeAttribute('data-status');
-    }
   }
 }
 
@@ -62,6 +39,8 @@ export function boardMouseDown(event: MouseEvent) {
     } else if (event.button === 2) {
       paintingMode = 'setBlank';
     }
+
+    applyDrawing(targetElement);
   }
 }
 
@@ -69,4 +48,34 @@ export function documentMouseUp(event: MouseEvent) {
   isDrawing = false;
   paintingMode = 'none';
   paintedCells.clear();
+}
+
+function applyDrawing(targetElement: HTMLElement) {
+  if (
+    !targetElement.classList.contains('board-cell') ||
+    !isDrawing ||
+    paintedCells.has(targetElement.id)
+  ) {
+    return;
+  }
+  paintedCells.add(targetElement.id);
+
+  switch (paintingMode) {
+    case 'setPaint':
+      if (targetElement.hasAttribute('data-status')) {
+        break;
+      }
+      targetElement.setAttribute('data-status', 'painted');
+      break;
+
+    case 'setBlank':
+      if (targetElement.hasAttribute('data-status')) {
+        break;
+      }
+      targetElement.setAttribute('data-status', 'blank');
+      break;
+
+    case 'erase':
+      targetElement.removeAttribute('data-status');
+  }
 }
