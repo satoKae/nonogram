@@ -63,6 +63,10 @@ export class BoardData {
     }
     return new Uint8Array([this._width, this._height, ...uint8Array]);
   }
+
+  toBase64String(): string {
+    return btoa(String.fromCharCode(...this.toUint8Array()));
+  }
 }
 
 export function getBoardData(board: HTMLElement): BoardData {
