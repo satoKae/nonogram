@@ -11,11 +11,10 @@
   --cell-size: 24px; /* セルの大きさ */
   --hint-area-size: 120px; /* ヒントエリア */
   --grid-line-thin: 1px; /* 細い罫線 */
-  --grid-line-thick: 2px; /* 太い罫線 */
 
   --color-border-main: #666; /* メインの枠線色 */
   --color-border-sub: #ccc; /* セル間の細い線色 */
-  --color-border-thick: #999; /* 5マスごとの太い線色 */
+  --color-border-thick: #5ba4ab; /* 5マスごとの線色 */
   --color-background-hint: #e8f4f5; /* ヒントエリアの背景色 */
   --color-fill: #000; /* 塗りつぶされたセルの色 */
   --color-empty: #fff; /* 塗りつぶされていないセルの色 */
@@ -104,12 +103,10 @@
 
 .board-cell[data-cell-x$='4'],
 .board-cell[data-cell-x$='9'] {
-  border-right-width: var(--grid-line-thick);
   border-right-color: var(--color-border-thick);
 }
 
 .board-cell[data-cell-y$='4'],
 .board-cell[data-cell-y$='9'] {
-  border-bottom-width: var(--grid-line-thick);
   border-bottom-color: var(--color-border-thick);
 }
