@@ -16,6 +16,7 @@
   --color-border-sub: #ccc; /* セル間の細い線色 */
   --color-border-thick: #5ba4ab; /* 5マスごとの線色 */
   --color-background-hint: #e8f4f5; /* ヒントエリアの背景色 */
+  --color-blank-x: #6ebdeb;
   --color-fill: #000; /* 塗りつぶされたセルの色 */
   --color-empty: #fff; /* 塗りつぶされていないセルの色 */
 }
@@ -114,4 +115,27 @@
 .board-cell[data-cell-y$='4'],
 .board-cell[data-cell-y$='9'] {
   border-bottom-color: var(--color-border-thick);
+}
+
+.board-cell[data-status='painted'] {
+  background-color: var(--color-fill);
+}
+
+.board-cell[data-status='blank'] {
+  background:
+    linear-gradient(
+      to bottom left,
+      transparent 47%,
+      var(--color-blank-x) 48%,
+      var(--color-blank-x) 52%,
+      transparent 53%
+    ),
+    linear-gradient(
+      to bottom right,
+      transparent 47%,
+      var(--color-blank-x) 48%,
+      var(--color-blank-x) 52%,
+      transparent 53%
+    );
+  background-repeat: no-repeat;
 }

@@ -1,3 +1,9 @@
+import {
+  boardContextMenu,
+  boardMouseDown,
+  boardMouseMove,
+  documentMouseUp,
+} from './draw.ts';
 import { createNewElement, TagName } from './utils/element.ts';
 
 export default function (
@@ -34,6 +40,11 @@ export default function (
   // 盤面
   boardElement.style.setProperty('--column-size', columnSize.toString());
   boardElement.style.setProperty('--row-size', rowSize.toString());
+
+  boardElement.addEventListener('contextmenu', boardContextMenu);
+  boardElement.addEventListener('mousemove', boardMouseMove);
+  boardElement.addEventListener('mousedown', boardMouseDown);
+  document.addEventListener('mouseup', documentMouseUp);
 
   for (let y = 0; y < rowSize; y++) {
     for (let x = 0; x < columnSize; x++) {
