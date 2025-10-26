@@ -16,8 +16,8 @@
   --color-border-sub: #ccc; /* セル間の細い線色 */
   --color-border-thick: #5ba4ab; /* 5マスごとの線色 */
   --color-background-hint: #e8f4f5; /* ヒントエリアの背景色 */
-  --color-blank-x: #6ebdeb;
-  --color-fill: #000; /* 塗りつぶされたセルの色 */
+  --color-blank-x: #67c9d2; /* バツの色 */
+  --color-fill: #176a71; /* 塗りつぶされたセルの色 */
   --color-empty: #fff; /* 塗りつぶされていないセルの色 */
 }
 
