@@ -94,7 +94,8 @@
 .board-cell {
   width: var(--cell-size);
   height: var(--cell-size);
-  border: var(--grid-line-thin) solid var(--color-border-sub);
+  border-right: var(--grid-line-thin) solid var(--color-border-sub);
+  border-bottom: var(--grid-line-thin) solid var(--color-border-sub);
   box-sizing: border-box;
   background-color: var(--color-empty);
   cursor: pointer;
