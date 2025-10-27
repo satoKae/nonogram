@@ -52,6 +52,49 @@ export class BoardData {
     return this._data;
   }
 
+  private getData(x: number, y: number): CellStatus {
+    return this._data[this._width * y + x];
+  }
+
+  private convertToHint(data: CellStatus[]): number[] {
+    let count: number = 0;
+    let target: CellStatus = 0;
+    const hint: number[] = [];
+    for (const cell of data) {
+      if (cell !== target) {
+        if (target == 1 && count !== 0) {
+          hint.push(count);
+        }
+        target = (target + 1) % 2;
+        count = 0;
+      }
+      count++;
+    }
+    if (target === 1) {
+      hint.push(count);
+    }
+    if (hint.length === 0) {
+      hint.push(0);
+    }
+    return hint;
+  }
+
+  getColumnHint(x: number): number[] {
+    const columnData: CellStatus[] = new Array<CellStatus>(this._height);
+    for (let y = 0; y < this._height; y++) {
+      columnData[y] = this.getData(x, y);
+    }
+    return this.convertToHint(columnData);
+  }
+
+  getRowHint(y: number): number[] {
+    const RowData: CellStatus[] = this._data.slice(
+      this._width * y,
+      this._width * (y + 1),
+    );
+    return this.convertToHint(RowData);
+  }
+
   toUint8Array(): Uint8Array {
     const uint8Array = new Uint8Array(Math.ceil(this._data.length / 8));
     for (let i = 0; i < this._data.length; i++) {
