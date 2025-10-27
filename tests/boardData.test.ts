@@ -44,7 +44,7 @@ describe('BoardData', () => {
     ];
     const boardData = new BoardData(data, 7, 5);
     const uint8Array = boardData.toUint8Array();
-    const newBoardData = new BoardData(uint8Array);
+    const newBoardData = BoardData.fromUint8Array(uint8Array);
 
     expect(uint8Array).toStrictEqual(
       new Uint8Array([
