@@ -1,51 +1,42 @@
 type CellStatus = 0 | 1;
 
 export class BoardData {
-  private _data: CellStatus[];
-  private _width: number;
-  private _height: number;
-
   constructor(
-    data: CellStatus[] | Uint8Array,
-    width?: number,
-    height?: number,
-  ) {
-    if (data instanceof Uint8Array) {
-      if (data.length < 2) {
-        throw new Error();
-      }
+    private _data: CellStatus[],
+    private _width: number,
+    private _height: number,
+  ) {}
 
-      this._width = data[0];
-      this._height = data[1];
-
-      const totalCells = this._width * this._height;
-      const dataLengthInBytes = Math.ceil(totalCells / 8);
-      const dataStart = 2;
-
-      if (data.length !== dataStart + dataLengthInBytes) {
-        throw new Error();
-      }
-
-      this._data = new Array<CellStatus>(totalCells);
-
-      for (let i = 0; i < totalCells; i++) {
-        const byteIndex = dataStart + Math.floor(i / 8);
-        const bitIndex = 7 - (i % 8);
-
-        if ((data[byteIndex] & (1 << bitIndex)) !== 0) {
-          this._data[i] = 1;
-        } else {
-          this._data[i] = 0;
-        }
-      }
-    } else {
-      if (height === undefined || width === undefined) {
-        throw new Error();
-      }
-      this._data = data;
-      this._width = width;
-      this._height = height;
+  static fromUint8Array(data: Uint8Array): BoardData {
+    if (data.length < 2) {
+      throw new Error();
     }
+
+    const width = data[0];
+    const height = data[1];
+
+    const totalCells = width * height;
+    const dataLengthInBytes = Math.ceil(totalCells / 8);
+    const dataStart = 2;
+
+    if (data.length !== dataStart + dataLengthInBytes) {
+      throw new Error();
+    }
+
+    const boardData = new Array<CellStatus>(totalCells);
+
+    for (let i = 0; i < totalCells; i++) {
+      const byteIndex = dataStart + Math.floor(i / 8);
+      const bitIndex = 7 - (i % 8);
+
+      if ((data[byteIndex] & (1 << bitIndex)) !== 0) {
+        boardData[i] = 1;
+      } else {
+        boardData[i] = 0;
+      }
+    }
+
+    return new BoardData(boardData, width, height);
   }
 
   get data() {
