@@ -52,6 +52,14 @@ export class BoardData {
     return this._data;
   }
 
+  get width() {
+    return this._width;
+  }
+
+  get height() {
+    return this._height;
+  }
+
   private getData(x: number, y: number): CellStatus {
     return this._data[this._width * y + x];
   }
