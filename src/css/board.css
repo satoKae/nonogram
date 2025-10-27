@@ -26,8 +26,8 @@
   grid-template-areas:
     'corner col-hint'
     'row-hint board';
-  grid-template-columns: var(--hint-area-size) 1fr;
-  grid-template-rows: var(--hint-area-size) 1fr;
+  grid-template-columns: max(var(--hint-area-size), auto) 1fr;
+  grid-template-rows: max(var(--hint-area-size), auto) 1fr;
   gap: 0;
   max-width: fit-content;
   border: var(--grid-line-thin) solid var(--color-border-main);
@@ -71,21 +71,24 @@
 
 .col-hint-cell {
   width: var(--cell-size);
-  height: var(--hint-area-size);
+  padding: calc(var(--cell-size) / 2.5) 0;
   flex-shrink: 0;
   display: flex;
-  justify-content: center;
-  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
   border-right: var(--grid-line-thin) solid var(--color-border-sub);
   box-sizing: border-box;
 }
 
 .row-hint-cell {
   height: var(--cell-size);
-  width: var(--hint-area-size);
+  padding: 0 calc(var(--cell-size) / 2.5);
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  gap: calc(var(--cell-size) / 2.5);
   border-bottom: var(--grid-line-thin) solid var(--color-border-sub);
   box-sizing: border-box;
 }
