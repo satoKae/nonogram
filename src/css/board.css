@@ -9,7 +9,6 @@
 
 :root {
   --cell-size: 24px; /* セルの大きさ */
-  --hint-area-size: 120px; /* ヒントエリア */
   --grid-line-thin: 1px; /* 細い罫線 */
 
   --color-border-main: #666; /* メインの枠線色 */
@@ -26,8 +25,8 @@
   grid-template-areas:
     'corner col-hint'
     'row-hint board';
-  grid-template-columns: max(var(--hint-area-size), auto) 1fr;
-  grid-template-rows: max(var(--hint-area-size), auto) 1fr;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1fr;
   gap: 0;
   max-width: fit-content;
   border: var(--grid-line-thin) solid var(--color-border-main);
@@ -71,7 +70,7 @@
 
 .col-hint-cell {
   width: var(--cell-size);
-  padding: calc(var(--cell-size) / 2.5) 0;
+  padding: calc(var(--cell-size) / 2) 0;
   flex-shrink: 0;
   display: flex;
   display: flex;
@@ -84,7 +83,7 @@
 
 .row-hint-cell {
   height: var(--cell-size);
-  padding: 0 calc(var(--cell-size) / 2.5);
+  padding: 0 calc(var(--cell-size) / 2);
   display: flex;
   justify-content: flex-end;
   align-items: center;
