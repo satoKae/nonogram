@@ -30,7 +30,7 @@ export class BoardData {
 
       for (let i = 0; i < totalCells; i++) {
         const byteIndex = dataStart + Math.floor(i / 8);
-        const bitIndex = i % 8;
+        const bitIndex = 7 - (i % 8);
 
         if ((data[byteIndex] & (1 << bitIndex)) !== 0) {
           this._data[i] = 1;
@@ -107,7 +107,7 @@ export class BoardData {
     const uint8Array = new Uint8Array(Math.ceil(this._data.length / 8));
     for (let i = 0; i < this._data.length; i++) {
       const byteIndex = Math.floor(i / 8);
-      const bitIndex = i % 8;
+      const bitIndex = 7 - (i % 8);
       if (this._data[i] === 1) {
         uint8Array[byteIndex] |= 1 << bitIndex;
       }
