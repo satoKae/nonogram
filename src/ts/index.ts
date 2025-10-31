@@ -36,8 +36,8 @@ randomButton?.addEventListener('click', () => {
         Array.from({ length: columnSize * rowSize }).map(
           (_): 0 | 1 => Math.floor(Math.random() * 2) as 0 | 1,
         ),
-        rowSize,
         columnSize,
+        rowSize,
       );
       url.searchParams.set('data', randomBoardData.toBase64String());
       location.href = url.toString();
