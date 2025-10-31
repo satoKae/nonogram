@@ -7,6 +7,12 @@ export class BoardData {
     private _height: number,
   ) {}
 
+  static fromBase64String(data: string): BoardData {
+    return BoardData.fromUint8Array(
+      Uint8Array.from(atob(data), (c) => c.charCodeAt(0)),
+    );
+  }
+
   static fromUint8Array(data: Uint8Array): BoardData {
     if (data.length < 2) {
       throw new Error();
