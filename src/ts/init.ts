@@ -56,4 +56,6 @@ export default function (
       cellElement.setAttribute('data-cell-y', y.toString());
     }
   }
+
+  document.getElementById('control')?.classList.remove('d-none');
 }
