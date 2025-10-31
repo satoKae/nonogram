@@ -17,7 +17,15 @@ window.addEventListener('load', () => {
         setHintData(boardData);
       } else {
         const width = Number(prompt('盤面の幅を入力 (1以上30以下)'));
+        if (!width || width < 1 || width > 30) {
+          throw new Error();
+        }
+
         const height = Number(prompt('盤面の高さを入力 (1以上30以下)'));
+        if (!height || height < 1 || height > 30) {
+          throw new Error();
+        }
+
         init(app, height, width);
       }
     } catch (e) {
