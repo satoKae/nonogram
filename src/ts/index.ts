@@ -16,16 +16,23 @@ window.addEventListener('load', () => {
         init(app, boardData.height, boardData.width);
         setHintData(boardData);
       } else {
-        const width = Number(prompt('盤面の幅を入力 (1以上30以下)'));
-        if (!width || width < 1 || width > 30) {
-          throw new Error();
+        let width: number;
+        while (true) {
+          const input = prompt('盤面の幅を入力 (1以上30以下)');
+          width = Number(input);
+          if (width >= 1 && width <= 30) {
+            break;
+          }
         }
 
-        const height = Number(prompt('盤面の高さを入力 (1以上30以下)'));
-        if (!height || height < 1 || height > 30) {
-          throw new Error();
+        let height: number;
+        while (true) {
+          const input = prompt('盤面の高さを入力 (1以上30以下)');
+          height = Number(input);
+          if (height >= 1 && height <= 30) {
+            break;
+          }
         }
-
         init(app, height, width);
       }
     } catch (e) {
