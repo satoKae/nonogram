@@ -18,22 +18,23 @@ export function setBoardData(boardData: BoardData): void {
 }
 
 export function setHintData(boardData: BoardData): void {
-  for (let x = 0; x < boardData.width; x++) {
-    const hint = boardData.getColumnHint(x);
-    const hintCellElement = document.getElementById(TagName.colHint(x));
+  function setHint(hintCellElement: HTMLElement | null, hint: number[]): void {
     hint.forEach((n) => {
       const hintElement = createNewElement('div', ['hint']);
       hintElement.textContent = String(n);
       hintCellElement?.appendChild(hintElement);
     });
   }
+
+  for (let x = 0; x < boardData.width; x++) {
+    const hint = boardData.getColumnHint(x);
+    const hintCellElement = document.getElementById(TagName.colHint(x));
+    setHint(hintCellElement, hint);
+  }
+
   for (let y = 0; y < boardData.height; y++) {
     const hint = boardData.getRowHint(y);
     const hintCellElement = document.getElementById(TagName.rowHint(y));
-    hint.forEach((n) => {
-      const hintElement = createNewElement('div', ['hint']);
-      hintElement.textContent = String(n);
-      hintCellElement?.appendChild(hintElement);
-    });
+    setHint(hintCellElement, hint);
   }
 }
