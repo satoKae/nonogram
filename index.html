@@ -1,12 +1,22 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>nonogram</title>
+    <title>お絵かきロジック</title>
   </head>
   <body>
     <div class="container">
+      <div class="control d-none" id="control">
+        <h2>お絵かきロジック</h2>
+        <div class="buttons">
+          <button type="button" id="random-button">ランダム問題</button>
+          <button type="button" id="save-button">盤面を保存</button>
+          <a href="/"
+            ><button type="button" id="new-button">新しい盤面</button></a
+          >
+        </div>
+      </div>
       <div id="app" class="app"></div>
     </div>
     <script type="module" src="/src/ts/index.ts"></script>
